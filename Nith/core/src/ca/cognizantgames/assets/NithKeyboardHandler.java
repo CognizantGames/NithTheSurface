@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 public class NithKeyboardHandler implements InputProcessor{
-    public boolean W, S, A, D, SPACE;
+    public boolean W, S, A, D, E, SPACE;
     @Override
     public boolean keyDown(int keycode) {
         if(keycode == Input.Keys.W){
@@ -27,6 +27,10 @@ public class NithKeyboardHandler implements InputProcessor{
             SPACE = true;
             return true;
         }
+        if(keycode == Input.Keys.E){
+            E = true;
+            return true;
+        }
         return false;
     }
 
@@ -46,6 +50,10 @@ public class NithKeyboardHandler implements InputProcessor{
         }
         if(keycode == Input.Keys.D){
             D = false;
+            return true;
+        }
+        if(keycode == Input.Keys.E){
+            E = false;
             return true;
         }
         if(keycode == Input.Keys.SPACE){

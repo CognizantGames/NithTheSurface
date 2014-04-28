@@ -12,7 +12,7 @@ public class TerrainGen {
         yData = new int[length];
     }
 
-    public void Generate(long seed, long roughness){
+    public void Generate(long roughness){
         int max = (int) roughness / 2;
         int min = (int) -roughness / 2;
         for(int i = 0; i < yData.length; i++){

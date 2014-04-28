@@ -6,48 +6,51 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.awt.*;
-
-public class Splash implements Screen {
+public class Win implements Screen{
     Game game;
 
-    Texture splash;
     SpriteBatch spriteBatch;
-    float fade = 1.0f;
-    float time;
 
-    public Splash(Game game){
+    Sprite image;
+
+    float stateTime;
+
+    public Win(Game game){
         this.game = game;
+        spriteBatch = new SpriteBatch();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue(), Color.WHITE.getAlpha());
-        fade -= delta / 2;
-        time += delta;
+
         spriteBatch.begin();
-        spriteBatch.draw(splash, 0, 0);
-        spriteBatch.setColor(1, 1, 1, fade);
+            image.draw(spriteBatch);
+            image.setPosition(0, 0);
         spriteBatch.end();
-        if(time >= 2){
-            game.setScreen(new Menu(game));
-        }else if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
-            game.setScreen(new Menu(game));
+        tick(delta);
+    }
+
+    public void tick(float delta){
+        stateTime += delta;
+        if(stateTime >= 2.0f){
+            if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
+                System.exit(-2);
+            }
         }
     }
 
     @Override
-    public void resize(int x, int y) {
+    public void resize(int width, int height) {
 
     }
 
     @Override
     public void show() {
-        spriteBatch = new SpriteBatch();
-        splash = new Texture(Gdx.files.internal("core/assets/images/splash.png"));
+        image = new Sprite(new Texture(Gdx.files.internal("core/assets/images/win.png")));
     }
 
     @Override
